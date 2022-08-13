@@ -5,14 +5,10 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View, KeyboardAvoidingVi
 import Icon from "react-native-vector-icons/Ionicons";
 
 const s = StyleSheet.create({
-    InputContainerWrapper: {
-        flex:0.1,
-    },
     InputContainer: {
         alignItems: 'center',
         flexDirection: "row",
         backgroundColor: '#F9F9F9',  
-        flex: 1,
         paddingHorizontal: 9,
     },
     Input: {
@@ -64,8 +60,7 @@ export default function Input({isMenuOpened, setIsMenuOpened}) {
         })
     }
 
-    return <KeyboardAvoidingView style={s.InputContainerWrapper}>
-            <View style={s.InputContainer}>
+    return <View style={s.InputContainer}>
                 <TouchableOpacity onPress={onMenuBtnPress}>
                     <Icon name={isMenuOpened ? "close" : "add"} style={{ color: "#323232" }} size={34}/>
                 </TouchableOpacity>
@@ -74,5 +69,4 @@ export default function Input({isMenuOpened, setIsMenuOpened}) {
                     <Text style={s.SendButton}>전송</Text>
                 </TouchableOpacity>
             </View>
-        </KeyboardAvoidingView>
 }
