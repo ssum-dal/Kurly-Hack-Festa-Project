@@ -28,7 +28,7 @@ export default function Input({isMenuOpened, setIsMenuOpened}) {
     
     useEffect(()=> {
         
-        const show = Keyboard.addListener("keyboardDidShow", () => {
+        const showKeyboardHandler = Keyboard.addListener("keyboardDidShow", () => {
             setKeyboardOn(true);
             setIsMenuOpened((prev) => {
                 // If Menu is Opened and show keyboard -> Hide Menu
@@ -38,13 +38,13 @@ export default function Input({isMenuOpened, setIsMenuOpened}) {
             })
         });
         
-        const hide = Keyboard.addListener("keyboardDidHide", () => {
+        const hideKeyboardHandler = Keyboard.addListener("keyboardDidHide", () => {
             setKeyboardOn(false);
         });
 
         return () => {
-            show.remove();
-            hide.remove();
+            showKeyboardHandler.remove();
+            hideKeyboardHandler.remove();
         }
         
     }, []);
