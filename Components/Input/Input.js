@@ -64,7 +64,7 @@ export default function Input({isMenuOpened, setIsMenuOpened}) {
                 <TouchableOpacity onPress={onMenuBtnPress}>
                     <Icon name={isMenuOpened ? "close" : "add"} style={{ color: "#323232" }} size={34}/>
                 </TouchableOpacity>
-                <TextInput style={s.Input}/>
+                <TextInput multiline={true} style={s.Input}/>
                 <TouchableOpacity>
                     <Text style={s.SendButton}>전송</Text>
                 </TouchableOpacity>
