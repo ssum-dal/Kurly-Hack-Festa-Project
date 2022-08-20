@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
+// 배송불편사항 클릭 시 나타나는 상세정보
+
 const s = StyleSheet.create({
     InfoView: {
         backgroundColor: '#ffc0cb',

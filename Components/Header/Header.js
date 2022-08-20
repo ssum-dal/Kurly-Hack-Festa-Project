@@ -4,13 +4,13 @@ import { View, Text, StyleSheet } from "react-native";
 const s = StyleSheet.create({
     HeaderView: {
         alignItems: 'center',
-        backgroundColor: '#ffffff',
+        backgroundColor: '#560C7B',
         paddingVertical: '3%'
     },
     TextView: {
         fontSize: 16,
         fontWeight: 'bold',
-        color: '#000000'
+        color: '#ffffff'
     }
 });
 

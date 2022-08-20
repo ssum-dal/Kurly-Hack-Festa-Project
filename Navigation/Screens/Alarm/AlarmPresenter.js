@@ -34,7 +34,7 @@ const info = [
 const s = StyleSheet.create({
     AlarmView: {
         flex: 1,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#FAFAFA',
     },
 });
 
