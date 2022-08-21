@@ -1,21 +1,48 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-
-// 메시지의 배송 정보
+import Icon from "react-native-vector-icons/Ionicons";
 
 const s = StyleSheet.create({
     InfoTextView: {
-        backgroundColor: '#FAFAFA',
-        marginVertical: '2%',
-        marginHorizontal: '5%'
+        marginHorizontal: '5%',
+        paddingVertical: '6%',
+        flexDirection: 'row',
+        borderBottomWidth: 0.8,
+        borderColor: '#F3F3F3'
     },
-    TrackingNumber: {
+    TextView: {
+        width: '85%'
+    },
+    AddressText: {
         fontWeight: 'bold',
-        marginBottom: '2%'
+        color: '#000000',
+        fontSize: 16
     },
+    RequestView: {
+        flexDirection: 'row'
+    },
+    RequestText: {
+        fontWeight: 'bold',
+        fontSize: 15,
+        color: '#5F0080',
+        marginRight: '2%',
+        paddingTop: '1%'
+    },
+    NormalText: {
+        fontSize: 15,
+        flex: 1,
+        paddingTop: '1%',
+        color: '#666666'
+    },
+    IconView: {
+        flex: 1,
+        alignItems: 'flex-end',
+        justifyContent: 'center'
+    }
+
 });
 
-function DeliveryInfoMessage({ navigation, trakingNum, name, address, category }) {
+function DeliveryInfoMessage({ navigation, trakingNum, name, address, number, request }) {
     return (
         <TouchableOpacity
             activeOpacity={1}
@@ -24,10 +51,23 @@ function DeliveryInfoMessage({ navigation, trakingNum, name, address, category }
             }}
         >
             <View style={s.InfoTextView}>
-                <Text style={s.TrackingNumber}>{trakingNum}</Text>
-                <Text>받는 분 : {name}</Text>
-                <Text>배송지 : {address}</Text>
-                <Text>문의사항 : {category}</Text>
+                <View style={s.TextView}>
+                    <Text style={s.AddressText}>{address}</Text>
+                    <Text style={s.NormalText}>{name}  |  {number}  |  {trakingNum}</Text>
+                    {request &&
+                        <View style={s.RequestView}>
+                            <Text style={s.RequestText}>요청사항</Text>
+                            <Text style={s.NormalText}>{request}</Text>
+                        </View>
+                    }
+                </View>
+                <View style={s.IconView}>
+                    <Icon 
+                        name="chevron-forward-outline"
+                        color="#5F0080"
+                        size={35}
+                    />
+                </View>
             </View>
         </TouchableOpacity>
     );
