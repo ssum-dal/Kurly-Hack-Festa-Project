@@ -16,14 +16,31 @@ const TopTab = createMaterialTopTabNavigator();
 
 const MessageTab = () => {
     return (
-        <TopTab.Navigator>
+        <TopTab.Navigator
+            screenOptions={{
+                tabBarLabelStyle: { 
+                    fontWeight: 'bold' 
+                },
+                tabBarIndicatorStyle: {
+                    backgroundColor: '#5F0080',
+                  },
+            }}
+        >
             <TopTab.Screen
                 name="발송 예정"
                 component={Message}
+                options={{
+                    tabBarActiveTintColor: '#5F0080',
+                    tabBarInactiveTintColor: '#000000'
+                }}
             />
             <TopTab.Screen
                 name="발송 완료"
                 component={MessageEnd}
+                options={{
+                    tabBarActiveTintColor: '#5F0080',
+                    tabBarInactiveTintColor: '#000000'
+                }}
             />
         </TopTab.Navigator>
     )
@@ -31,14 +48,31 @@ const MessageTab = () => {
 
 const AlarmTab = () => {
     return (
-        <TopTab.Navigator>
+        <TopTab.Navigator
+            screenOptions={{
+                tabBarLabelStyle: { 
+                    fontWeight: 'bold' 
+                },
+                tabBarIndicatorStyle: {
+                    backgroundColor: '#5F0080',
+                  },
+            }}
+        >
             <TopTab.Screen
                 name="처리 예정"
                 component={Alarm}
+                options={{
+                    tabBarActiveTintColor: '#5F0080',
+                    tabBarInactiveTintColor: '#000000'
+                }}
             />
             <TopTab.Screen
                 name="처리 완료"
                 component={AlarmEnd}
+                options={{
+                    tabBarActiveTintColor: '#5F0080',
+                    tabBarInactiveTintColor: '#000000'
+                }}
             />
         </TopTab.Navigator>
     )
@@ -63,6 +97,7 @@ const BottomTab = () => {
                     headerTintColor: '#ffffff',
                     headerTitleStyle: {
                         fontWeight: 'bold',
+                        fontSize: 16
                     },
                     tabBarIcon: ({ focused }) => (
                         <Icon
@@ -85,6 +120,7 @@ const BottomTab = () => {
                     headerTintColor: '#ffffff',
                     headerTitleStyle: {
                         fontWeight: 'bold',
+                        fontSize: 16
                     },
                     tabBarIcon: ({ focused }) => (
                         <Icon
