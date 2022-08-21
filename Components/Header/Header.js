@@ -4,8 +4,8 @@ import { View, Text, StyleSheet } from "react-native";
 const s = StyleSheet.create({
     HeaderView: {
         alignItems: 'center',
-        backgroundColor: '#560C7B',
-        paddingVertical: '3%'
+        backgroundColor: '#5F0080',
+        paddingVertical: '4%'
     },
     TextView: {
         fontSize: 16,

@@ -6,7 +6,7 @@ const Stack = createStackNavigator();
 
 export default () => {
     return (
-        <Stack.Navigator swipeEnabled={false}>
+        <Stack.Navigator>
             <Stack.Screen
                 name="MessagePresenter"
                 component={MessagePresenter}

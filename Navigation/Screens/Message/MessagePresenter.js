@@ -48,7 +48,6 @@ export default({ navigation }) => {
                 name={item.name}
                 address={item.address}
                 category={item.category}
-                detail={item.detail}
             />
         );
     }
