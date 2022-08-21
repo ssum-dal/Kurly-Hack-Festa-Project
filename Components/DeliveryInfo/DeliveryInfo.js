@@ -20,7 +20,7 @@ function DeliveryInfo({ navigation, trakingNum, name, address, category, detail,
         <TouchableOpacity
             activeOpacity={1}
             onPress={() => {
-                navigation.push('DetailsPresenter',{
+                navigation.push('Details',{
                     trakingNum: trakingNum,
                     name: name,
                     address: address,

@@ -1,16 +1,15 @@
 import React from "react";
-import {createStackNavigator, CardStyleInterpolators} from "@react-navigation/stack";
-import AlarmPresenter from "./AlarmPresenter";
+import {createStackNavigator} from "@react-navigation/stack";
+import MessageEndPresenter from "./MessageEndPresenter";
 
 const Stack = createStackNavigator();
 
 export default () => {
-
     return (
         <Stack.Navigator>
             <Stack.Screen
-                name="AlarmPresenter"
-                component={AlarmPresenter}
+                name="MessageEndPresenter"
+                component={MessageEndPresenter}
                 options={{headerShown: false}}
             />
         </Stack.Navigator>
