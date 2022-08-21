@@ -23,7 +23,7 @@ const BottomTab = () => {
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
                         <Icon
-                            name="chatbox-ellipses-outline"
+                            name={focused ? "chatbox-ellipses" : "chatbox-ellipses-outline"}
                             style={{ color: focused ? "#5F0080" : "#404040" }}
                             size={30}
                         />
@@ -37,7 +37,7 @@ const BottomTab = () => {
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
                         <Icon
-                            name="notifications"
+                            name={focused ? "notifications" : "notifications-outline"}
                             style={{ color: focused ? "#5F0080" : "#404040" }}
                             size={30}
                         />
