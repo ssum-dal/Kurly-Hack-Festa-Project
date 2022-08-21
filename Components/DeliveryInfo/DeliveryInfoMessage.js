@@ -15,7 +15,7 @@ const s = StyleSheet.create({
     },
 });
 
-function DeliveryInfoMessage({ navigation, trakingNum, name, address, category, detail, uri }) {
+function DeliveryInfoMessage({ navigation, trakingNum, name, address, category }) {
     return (
         <TouchableOpacity
             activeOpacity={1}
