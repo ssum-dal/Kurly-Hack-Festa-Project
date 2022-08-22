@@ -1,27 +1,39 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-// 배송불편사항 클릭 시 나타나는 상세정보
-
 const s = StyleSheet.create({
     InfoView: {
-        backgroundColor: '#ffc0cb',
-        marginVertical: '2%',
-        marginHorizontal: '5%'
     },
-    TrackingNumber: {
-        fontWeight: 'bold',
-        marginBottom: '2%'
+    TextView: {
+        flexDirection: 'row'
     },
+    Category: {
+        fontSize: 15,
+        color: '#000000',
+    },
+    TextStyle: {
+        flex: 1,
+        fontSize: 15,
+        color: '#666666',
+        marginLeft: '3%'
+    }
 });
 
 function DeliveryInfoNotTouchable({ trakingNum, name, address, category}) {
     return (
         <View style={s.InfoView}>
-            <Text style={s.TrackingNumber}>{trakingNum}</Text>
-            <Text>받는 분 : {name}</Text>
-            <Text>배송지 : {address}</Text>
-            <Text>문의사항 : {category}</Text>
+            <View style={s.TextView}>
+                <Text style={s.Category}>받는분  |</Text>
+                <Text style={s.TextStyle}>{name}</Text>
+            </View>
+            <View style={s.TextView}>
+                <Text style={s.Category}>배송지  |</Text>
+                <Text style={s.TextStyle}>{address}</Text>
+            </View>
+            <View style={s.TextView}>
+                <Text style={s.Category}>[상세유형]</Text>
+                <Text style={s.TextStyle}>{category}</Text>
+            </View>
         </View>
     );
 }

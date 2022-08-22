@@ -16,6 +16,7 @@ export default ({route}) => {
                         name={route.params.name}
                         address={route.params.address}
                         category={route.params.category}
+                        title={route.params.title}
                         detail={route.params.detail}
                         uri={route.params.uri}
                     />

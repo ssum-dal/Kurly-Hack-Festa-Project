@@ -1,9 +1,10 @@
 import React, {useState} from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, ImageBackground, TouchableOpacity } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import DeliveryInfoNotTouchable from "../../../Components/DeliveryInfo/DeliveryInfoNotTouchable";
 import Header from "../../../Components/Header/Header";
 import Modal from "react-native-modal";
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const s = StyleSheet.create({
     View: {
@@ -11,13 +12,19 @@ const s = StyleSheet.create({
         backgroundColor: '#ffffff',
     },
     DetailsView: {
-        marginHorizontal: '5%',
-        marginVertical: '3%'
+        paddingHorizontal: '7%',
+        paddingVertical: '2%',
+        marginBottom: '3%'
     },
     HeadText: {
         fontWeight: 'bold',
         fontSize: 16,
+        color: '#000000',
         marginVertical: '2%'
+    },
+    SubText: {
+        fontSize: 15,
+        color: '#666666'
     },
     Image: {
         width: '100%',
@@ -27,35 +34,41 @@ const s = StyleSheet.create({
         width: '100%',
         height: '100%'
     },
-    ButtonView: {
-        alignItems: 'center',
-        marginVertical: '3%'
-    },
     Button: {
-        backgroundColor: '#dddddd',
-        padding: '3%',
-        borderRadius: 10
+        backgroundColor: '#5F0080',
+        borderRadius: 7
+    },
+    ButtonText: {
+        color: '#ffffff',
+        textAlign: 'center',
+        paddingVertical: '4%',
+        fontSize: 16,
+        fontWeight: 'bold'
     }
 });
 
-export default({trakingNum, name, address, category, detail, uri}) => {
+export default({trakingNum, name, address, title, category, detail, uri}) => {
     const [isVisible, setIsVisible] = useState(false);
     const navigation = useNavigation();
     
     return (
         <View style={s.View}>
             <Header title={'배송불편사항'}/>
-            <DeliveryInfoNotTouchable
-                trakingNum={trakingNum}
-                name={name}
-                address={address}
-                category={category}
-                detail={detail}
-            />
-
+            
             <View style={s.DetailsView}>
-                <Text style={s.HeadText}>문의내용</Text>
-                <Text>{detail}</Text>
+                <Text style={s.HeadText}>주문자 정보</Text>
+                <DeliveryInfoNotTouchable
+                    trakingNum={trakingNum}
+                    name={name}
+                    address={address}
+                    category={category}
+                    detail={detail}
+                />
+            </View>
+            
+            <View style={s.DetailsView}>
+                <Text style={s.HeadText}>[배송문의] {title}</Text>
+                <Text style={s.SubText}>{detail}</Text>
             </View>
             <View style={s.DetailsView}>
                 <Text style={s.HeadText}>고객 첨부 사진</Text>
@@ -77,16 +90,14 @@ export default({trakingNum, name, address, category, detail, uri}) => {
                 }
             </View>
 
-            <View style={s.ButtonView}>
+            <View style={s.DetailsView}>
                 <TouchableOpacity
                     style={s.Button}
                     onPress={() => {
                         navigation.push('Chatting')
                     }}
                 >
-                    <View>
-                        <Text>메시지 전송</Text>
-                    </View>
+                    <Text style={s.ButtonText}>메시지 전송</Text>
                 </TouchableOpacity>
             </View>
 
@@ -100,12 +111,21 @@ export default({trakingNum, name, address, category, detail, uri}) => {
 				onBackdropPress={() => {setIsVisible(false)}}
                 style={{alignItems: 'center'}}
             >
-                <Image
+                <ImageBackground
                     style={s.FullImageView}
                     source={{
                         uri: uri
                     }}
-                />
+                >
+                    <TouchableOpacity
+                        style={{alignItems: 'flex-end'}}
+                        onPress={() => {
+                            setIsVisible(false);
+                        }}
+                    >
+                        <Icon name="close-circle" size={40} color="#000000"/>
+                    </TouchableOpacity>
+                </ImageBackground>
             </Modal>
         </View>
     )
