@@ -36,9 +36,9 @@ const s = StyleSheet.create({
 
 function SpeechBubble({ content, uri }) {
     return (
-        <View style={uri.length > 0 ? s.ImageBubbleView : s.BubbleView}>
+        <View style={uri !== null && uri !== undefined && uri.length > 0 ? s.ImageBubbleView : s.BubbleView}>
             <Text>{content}</Text>
-            {uri.length > 0 &&
+            {uri !== null && uri !== undefined && uri.length > 0 &&
                 <View style={s.ImageView}>
                     <Image
                         style={s.Image}
@@ -47,7 +47,6 @@ function SpeechBubble({ content, uri }) {
                 </View>
             }
         </View>
-
     );
 }
 

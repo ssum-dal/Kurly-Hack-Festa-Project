@@ -9,3 +9,11 @@ export const ConvertDate = (date) => {
     return `${year}년 ${month}월 ${day}일 ${dayOfWeek}`;
 
 } 
+
+export const DiffDate = (date) => {
+    let utc = date.getTime() + (date.getTimezoneOffset() * 60 * 1000);
+    let time_diff = 9 * 60 * 60 * 1000;
+    let now = new Date(utc + (time_diff));
+
+    return now;
+}

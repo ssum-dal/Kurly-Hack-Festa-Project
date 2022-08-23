@@ -15,16 +15,10 @@ import { launchCamera } from 'react-native-image-picker';
 import Icon from "react-native-vector-icons/Ionicons";
 import SpeechBubble from "../../../Components/Chatting/SpeechBubble";
 import Header from "../../../Components/Header/Header";
-import { ConvertDate } from "../../../Utils/Date";
+import { ConvertDate, DiffDate } from "../../../Utils/Date";
 import axios from "axios";
 import { mainURL } from "../../../Context/Route";
 
-const info = [
-    {id: 0, content: 1, date: String(new Date('2022-08-22')), isFirstMessage: true},
-    {id: 1, content: 2, date: String(new Date('2022-08-22')), isFirstMessage: false},
-    {id: 2, content: 3, date: String(new Date('2022-08-23')), isFirstMessage: true},
-    {id: 3, content: 4, date: String(new Date('2022-08-24')), isFirstMessage: true}
-]
 
 const s = StyleSheet.create({
     ChattingViewContainer: {
@@ -87,11 +81,7 @@ const s = StyleSheet.create({
     },
 });
 
-const completedPhrase = '안녕하세요. *** 고객님, 마켓컬리의 ***입니다.\n\n주문하신 신선한 상품을 요청하신 문 앞에 안전하게 배송 완료하였습니다.'
-const delayedPhrase = '안녕하세요. *** 고객님, 마켓컬리의 ***입니다.\n\n배송지연 관련 안내드립니다.'
-const basicPhrase = '안녕하세요. *** 고객님, 마켓컬리의 ***입니다.\n\n오배송 관련 안내드립니다.'
-
-export default({trackingNum, orderNum, isCs, csId, isDone}) => {
+export default({name, trackingNum, orderNum, isCs, csId, isDone}) => {
     const [isMenuOpened, setIsMenuOpened] = useState(false);
     const [photo, setPhoto] = useState();
     const [isKeyboardOn, setKeyboardOn] = useState(false);
@@ -100,6 +90,10 @@ export default({trackingNum, orderNum, isCs, csId, isDone}) => {
     const [disabled, setDisabled] = useState(true);
     const [chatList, setChatList] = useState([]);
     const scrollRef = useRef();
+
+    const completedPhrase = `안녕하세요. ${name} 고객님, 마켓컬리의 박샛별입니다.\n\n주문하신 신선한 상품을 요청하신 문 앞에 안전하게 배송 완료하였습니다.`
+    const delayedPhrase = `안녕하세요. ${name}고객님, 마켓컬리의 박샛별입니다.\n\n배송지연 관련 안내드립니다.`
+    const basicPhrase = `안녕하세요. ${name}고객님, 마켓컬리의 박샛별입니다.\n\n오배송 관련 안내드립니다.`
 
     const renderMessage = ({item, index}) => {    
         return (
@@ -142,9 +136,9 @@ export default({trackingNum, orderNum, isCs, csId, isDone}) => {
             return 1;
         } else {
             let lastDate = new Date(chatList[len-1].time);
-            let now = new Date();
+            let now = DiffDate(new Date());
             
-            if(now.getFullYear() === lastDate.getFullYear() && now.getMonth() === lastDate.getMonth() && now.getDate === lastDate.getDate()) {
+            if(now.getFullYear() === lastDate.getFullYear() && now.getMonth() === lastDate.getMonth() && now.getDate() === lastDate.getDate()) {
                 return 0;
             } else {
                 return 1;
@@ -168,7 +162,7 @@ export default({trackingNum, orderNum, isCs, csId, isDone}) => {
             img_uri: photo,
             is_first_msg: isFirstMessage(),
             order_num: orderNum,
-            time: String(new Date())
+            time: String(DiffDate(new Date()))
         }
         
         const data = new FormData();
@@ -186,8 +180,6 @@ export default({trackingNum, orderNum, isCs, csId, isDone}) => {
                 type: 'multipart/form-data'
             })
         }
-
-        console.log(data)
         
         const status = state == 2 ? 2 : 3
         const msgUrl = `${mainURL}/delivery/msg/todo/${status}/${trackingNum}`;
@@ -195,8 +187,7 @@ export default({trackingNum, orderNum, isCs, csId, isDone}) => {
         
         await axios.post(isCs ? csUrl : msgUrl, data,{
             headers: {'content-type': 'multipart/form-data'}
-        }
-            ).then((result) => {
+        }).then((result) => {
                 setChatList((prev) => prev.concat(newData));
                 setPhoto();
                 setText('');

@@ -11,6 +11,7 @@ export default ({route}) => {
                 name="ChattingPresenter"
                 children={() => (
                     <ChattingPresenter
+                        name={route.params.name}
                         trackingNum={route.params.trackingNum}
                         orderNum={route.params.orderNum}
                         isCs={route.params.isCs}

@@ -43,7 +43,7 @@ export default({ navigation }) => {
             })
         }
         getData();
-    }, [csDoneList]);
+    }, []);
 
     return (
         <View style={s.AlarmView}>

@@ -48,6 +48,7 @@ function DeliveryInfoMessage({ navigation, trackingNum, name, address, number, r
             activeOpacity={1}
             onPress={() => {
                 navigation.push('Chatting',{
+                    name: name,
                     trackingNum: trackingNum,
                     orderNum: orderNum,
                     isCs: false,

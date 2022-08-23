@@ -96,6 +96,7 @@ export default({trackingNum, name, address, title, category, detail, uri, orderN
                     style={s.Button}
                     onPress={() => {
                         navigation.push('Chatting', {
+                            name: name,
                             trackingNum: trackingNum,
                             orderNum: orderNum,
                             isCs: true,

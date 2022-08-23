@@ -39,7 +39,7 @@ export default({ navigation }) => {
             })
         }
         getData();
-    }, [msgDoneList]);
+    }, []);
 
     return (
         <View style={s.MessageView}>
