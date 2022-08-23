@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import { 
     View, 
     StyleSheet, 
@@ -99,6 +99,7 @@ export default({trackingNum, orderNum, isCs, csId}) => {
     const [state, setState] = useState(0);
     const [disabled, setDisabled] = useState(true);
     const [chatList, setChatList] = useState([]);
+    const scrollRef = useRef();
 
     const renderMessage = ({item, index}) => {    
         return (
@@ -134,6 +135,22 @@ export default({trackingNum, orderNum, isCs, csId}) => {
         }
     }
 
+    const isFirstMessage = () => {
+        let len = chatList.length;
+        let lastDate = new Date(chatList[len-1].time);
+        let now = new Date();
+  
+        if (len == 0) {
+            return 1;
+        } else {
+            if(now.getFullYear() === lastDate.getFullYear() && now.getMonth() === lastDate.getMonth() && now.getDate === lastDate.getDate()) {
+                return 0;
+            } else {
+                return 1;
+            }
+        }
+    }
+
     const sendAlert = () => {
         Alert.alert("주의", "전송을 누르면 고객에게 알림이 갑니다. 전송하시겠습니까?", [
 			{ text: "취소", onPress: () => null, style: "cancel" },
@@ -148,14 +165,14 @@ export default({trackingNum, orderNum, isCs, csId}) => {
         const msgData = {
             text: text,
             img_uri: photo,
-            is_first_msg: 1,
+            is_first_msg: isFirstMessage(),
             order_num: orderNum
         }
 
         const csData = {
             text: text,
             img_uri: photo,
-            is_first_msg: 1,
+            is_first_msg: isFirstMessage(),
             order_num: orderNum,
             cs_id: csId
         }
@@ -172,13 +189,11 @@ export default({trackingNum, orderNum, isCs, csId}) => {
                 setText('');
                 setIsMenuOpened(false);
                 Keyboard.dismiss();
+                scrollRef.current.scrollToEnd({duration: 500});
     
             }).catch((err) => {
                 console.log(`addChatting err = ${err}`);
             });
-
-        //scrollEnd..
-        //완료로 바꾸기
     }
 
     const onMenuBtnPress = () => {
@@ -234,6 +249,7 @@ export default({trackingNum, orderNum, isCs, csId}) => {
                     <Header title={'메시지 발송'}/>
                     <View style={s.ChattingHistoryView}>
                         <FlatList
+                            ref={scrollRef}
                             data={chatList}
                             renderItem={renderMessage}
                             keyExtractor={(item) => String(item.time)}
