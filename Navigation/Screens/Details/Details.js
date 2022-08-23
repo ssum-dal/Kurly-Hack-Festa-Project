@@ -21,6 +21,7 @@ export default ({route}) => {
                         uri={route.params.uri}
                         orderNum={route.params.orderNum}
                         csId={route.params.csId}
+                        isDone={route.params.isDone}
                     />
                 )}
                 options={{headerShown: false}}

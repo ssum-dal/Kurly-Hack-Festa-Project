@@ -15,6 +15,7 @@ export default ({route}) => {
                         orderNum={route.params.orderNum}
                         isCs={route.params.isCs}
                         csId={route.params.csId}
+                        isDone={route.params.isDone}
                     />
                 )}
                 options={{headerShown: false}}

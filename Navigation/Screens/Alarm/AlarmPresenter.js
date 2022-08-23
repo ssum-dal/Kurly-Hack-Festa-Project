@@ -28,6 +28,7 @@ export default({ navigation }) => {
                 uri={item.img_uri}
                 orderNum={item.order_num}
                 csId={item.cs_id}
+                isDone={false}
             />
         );
     }

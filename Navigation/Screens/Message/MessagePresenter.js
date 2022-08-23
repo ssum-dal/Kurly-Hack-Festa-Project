@@ -24,6 +24,7 @@ export default({ navigation }) => {
                 number={item.phone_num}
                 request={item.user_request}
                 orderNum={item.order_num}
+                isDone={false}
             />
         );
     }

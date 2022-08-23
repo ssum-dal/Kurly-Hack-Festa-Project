@@ -42,7 +42,7 @@ const s = StyleSheet.create({
 
 });
 
-function DeliveryInfoMessage({ navigation, trackingNum, name, address, number, request, orderNum }) {
+function DeliveryInfoMessage({ navigation, trackingNum, name, address, number, request, orderNum, isDone }) {
     return (
         <TouchableOpacity
             activeOpacity={1}
@@ -50,7 +50,8 @@ function DeliveryInfoMessage({ navigation, trackingNum, name, address, number, r
                 navigation.push('Chatting',{
                     trackingNum: trackingNum,
                     orderNum: orderNum,
-                    isCs: false
+                    isCs: false,
+                    isDone: isDone
                 });
             }}
         >

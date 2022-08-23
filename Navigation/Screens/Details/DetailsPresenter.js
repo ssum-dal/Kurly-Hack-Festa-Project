@@ -47,7 +47,7 @@ const s = StyleSheet.create({
     }
 });
 
-export default({trackingNum, name, address, title, category, detail, uri, orderNum, csId}) => {
+export default({trackingNum, name, address, title, category, detail, uri, orderNum, csId, isDone}) => {
     const [isVisible, setIsVisible] = useState(false);
     const navigation = useNavigation();
     
@@ -92,17 +92,19 @@ export default({trackingNum, name, address, title, category, detail, uri, orderN
 
             <View style={s.DetailsView}>
                 <TouchableOpacity
+                    activeOpacity={0.9}
                     style={s.Button}
                     onPress={() => {
                         navigation.push('Chatting', {
                             trackingNum: trackingNum,
                             orderNum: orderNum,
                             isCs: true,
-                            csId: csId
+                            csId: csId,
+                            isDone: isDone
                         })
                     }}
                 >
-                    <Text style={s.ButtonText}>메시지 전송</Text>
+                    <Text style={s.ButtonText}>{isDone ? '메시지 이력': '메시지 전송'}</Text>
                 </TouchableOpacity>
             </View>
 

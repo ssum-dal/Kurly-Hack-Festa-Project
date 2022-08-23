@@ -41,7 +41,7 @@ const s = StyleSheet.create({
     }
 });
 
-function DeliveryInfo({ navigation, trackingNum, name, number, address, category, title, detail, uri, orderNum, csId }) {
+function DeliveryInfo({ navigation, trackingNum, name, number, address, category, title, detail, uri, orderNum, csId, isDone }) {
     return (
         <TouchableOpacity
             activeOpacity={1}
@@ -55,7 +55,8 @@ function DeliveryInfo({ navigation, trackingNum, name, number, address, category
                     detail: detail,
                     uri: uri,
                     orderNum: orderNum,
-                    csId: csId
+                    csId: csId,
+                    isDone: isDone
                 })
             }}
         >

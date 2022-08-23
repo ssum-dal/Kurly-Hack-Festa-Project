@@ -91,7 +91,7 @@ const completedPhrase = '안녕하세요. *** 고객님, 마켓컬리의 ***입�
 const delayedPhrase = '안녕하세요. *** 고객님, 마켓컬리의 ***입니다.\n\n배송지연 관련 안내드립니다.'
 const basicPhrase = '안녕하세요. *** 고객님, 마켓컬리의 ***입니다.\n\n오배송 관련 안내드립니다.'
 
-export default({trackingNum, orderNum, isCs, csId}) => {
+export default({trackingNum, orderNum, isCs, csId, isDone}) => {
     const [isMenuOpened, setIsMenuOpened] = useState(false);
     const [photo, setPhoto] = useState();
     const [isKeyboardOn, setKeyboardOn] = useState(false);
@@ -276,6 +276,7 @@ export default({trackingNum, orderNum, isCs, csId}) => {
                         </ImageBackground>
                     </View>
                 }
+                {!isDone &&
                     <View style={s.InputContainer}>
                         <TouchableOpacity onPress={onMenuBtnPress}>
                             <Icon  
@@ -300,7 +301,7 @@ export default({trackingNum, orderNum, isCs, csId}) => {
                         >
                             <Text style={disabled ? s.Disabled : s.Activated}>전송</Text>
                         </TouchableOpacity>
-                    </View>
+                    </View>}
                 {isMenuOpened  && 
                     <View style={s.MenuContainer}>
                         <TouchableOpacity
