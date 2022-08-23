@@ -10,6 +10,8 @@ import Chatting from "../Screens/Chatting/Chatting";
 import AlarmEnd from "../Screens/AlarmEnd/AlarmEnd";
 import Details from "../Screens/Details/Details";
 
+import LogIn from "../Screens/LogIn/LogIn";
+
 const RootStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();

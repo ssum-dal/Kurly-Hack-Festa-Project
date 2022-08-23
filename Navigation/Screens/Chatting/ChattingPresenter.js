@@ -137,12 +137,13 @@ export default({trackingNum, orderNum, isCs, csId, isDone}) => {
 
     const isFirstMessage = () => {
         let len = chatList.length;
-        let lastDate = new Date(chatList[len-1].time);
-        let now = new Date();
   
         if (len == 0) {
             return 1;
         } else {
+            let lastDate = new Date(chatList[len-1].time);
+            let now = new Date();
+            
             if(now.getFullYear() === lastDate.getFullYear() && now.getMonth() === lastDate.getMonth() && now.getDate === lastDate.getDate()) {
                 return 0;
             } else {
@@ -162,27 +163,39 @@ export default({trackingNum, orderNum, isCs, csId, isDone}) => {
     }
 
     const addChatting = async() => {
-        const msgData = {
-            text: text,
-            img_uri: photo,
-            is_first_msg: isFirstMessage(),
-            order_num: orderNum
-        }
-
-        const csData = {
+        const newData = {
             text: text,
             img_uri: photo,
             is_first_msg: isFirstMessage(),
             order_num: orderNum,
-            cs_id: csId
+            time: String(new Date())
         }
+        
+        const data = new FormData();
+        data.append('text', text);
+        data.append('is_first_msg', isFirstMessage());
+        data.append('order_num', orderNum);
+        if (isCs) {
+            data.append('cs_id', csId);
+        }
+
+        if (photo) {
+            data.append('img_uri', {
+                uri: photo,
+                name: String(photo),
+                type: 'multipart/form-data'
+            })
+        }
+
+        console.log(data)
+        
         const status = state == 2 ? 2 : 3
         const msgUrl = `${mainURL}/delivery/msg/todo/${status}/${trackingNum}`;
         const csUrl = `${mainURL}/delivery/cs/todo/${trackingNum}`;
         
-        const newData = {...msgData, time: String(new Date())}
-        
-        await axios.post(isCs ? csUrl : msgUrl, isCs ? csData : msgData
+        await axios.post(isCs ? csUrl : msgUrl, data,{
+            headers: {'content-type': 'multipart/form-data'}
+        }
             ).then((result) => {
                 setChatList((prev) => prev.concat(newData));
                 setPhoto();
