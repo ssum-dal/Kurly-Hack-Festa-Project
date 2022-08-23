@@ -4,12 +4,19 @@ import ChattingPresenter from "./ChattingPresenter";
 
 const Stack = createStackNavigator();
 
-export default () => {
+export default ({route}) => {
     return (
         <Stack.Navigator>
             <Stack.Screen
                 name="ChattingPresenter"
-                component={ChattingPresenter}
+                children={() => (
+                    <ChattingPresenter
+                        trackingNum={route.params.trackingNum}
+                        orderNum={route.params.orderNum}
+                        isCs={route.params.isCs}
+                        csId={route.params.csId}
+                    />
+                )}
                 options={{headerShown: false}}
             />
         </Stack.Navigator>

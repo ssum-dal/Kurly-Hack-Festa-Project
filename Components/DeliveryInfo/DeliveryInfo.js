@@ -41,26 +41,29 @@ const s = StyleSheet.create({
     }
 });
 
-function DeliveryInfo({ navigation, trakingNum, name, number, address, category, title, detail, uri }) {
+function DeliveryInfo({ navigation, trackingNum, name, number, address, category, title, detail, uri, orderNum, csId }) {
     return (
         <TouchableOpacity
             activeOpacity={1}
             onPress={() => {
                 navigation.push('Details',{
-                    trakingNum: trakingNum,
+                    trackingNum: trackingNum,
                     name: name,
                     address: address,
                     category: category,
                     title: title,
                     detail: detail,
-                    uri: uri
+                    uri: uri,
+                    orderNum: orderNum,
+                    csId: csId
                 })
             }}
         >
             <View style={s.InfoTextView}>
                 <View style={s.TextView}>
                     <Text style={s.AddressText}>{address}</Text>
-                    <Text style={s.NormalText}>{name}  |  {number}  |  {trakingNum}</Text>
+                    <Text style={s.NormalText}>{name}  |  {number}</Text>
+                    <Text style={s.NormalText}>{trackingNum}</Text>
                     <View style={s.RequestView}>
                         <Text style={s.RequestText}>배송문의</Text>
                         <Text style={s.NormalText}>{category}</Text>

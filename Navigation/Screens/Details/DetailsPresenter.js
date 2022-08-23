@@ -47,7 +47,7 @@ const s = StyleSheet.create({
     }
 });
 
-export default({trakingNum, name, address, title, category, detail, uri}) => {
+export default({trackingNum, name, address, title, category, detail, uri, orderNum, csId}) => {
     const [isVisible, setIsVisible] = useState(false);
     const navigation = useNavigation();
     
@@ -58,7 +58,7 @@ export default({trakingNum, name, address, title, category, detail, uri}) => {
             <View style={s.DetailsView}>
                 <Text style={s.HeadText}>주문자 정보</Text>
                 <DeliveryInfoNotTouchable
-                    trakingNum={trakingNum}
+                    trackingNum={trackingNum}
                     name={name}
                     address={address}
                     category={category}
@@ -94,7 +94,12 @@ export default({trakingNum, name, address, title, category, detail, uri}) => {
                 <TouchableOpacity
                     style={s.Button}
                     onPress={() => {
-                        navigation.push('Chatting')
+                        navigation.push('Chatting', {
+                            trackingNum: trackingNum,
+                            orderNum: orderNum,
+                            isCs: true,
+                            csId: csId
+                        })
                     }}
                 >
                     <Text style={s.ButtonText}>메시지 전송</Text>

@@ -48,7 +48,6 @@ function SpeechBubble({ content, uri }) {
             }
         </View>
     );
-
 }
 
 export default SpeechBubble; 

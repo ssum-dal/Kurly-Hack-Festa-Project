@@ -12,13 +12,15 @@ export default ({route}) => {
                 name="DetailsPresenter"
                 children={() => (
                     <DetailsPresenter
-                        trakingNum={route.params.trakingNum}
+                        trackingNum={route.params.trackingNum}
                         name={route.params.name}
                         address={route.params.address}
                         category={route.params.category}
                         title={route.params.title}
                         detail={route.params.detail}
                         uri={route.params.uri}
+                        orderNum={route.params.orderNum}
+                        csId={route.params.csId}
                     />
                 )}
                 options={{headerShown: false}}

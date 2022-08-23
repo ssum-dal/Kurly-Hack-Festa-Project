@@ -19,7 +19,7 @@ const s = StyleSheet.create({
     }
 });
 
-function DeliveryInfoNotTouchable({ trakingNum, name, address, category}) {
+function DeliveryInfoNotTouchable({ trackingNum, name, address, category}) {
     return (
         <View style={s.InfoView}>
             <View style={s.TextView}>

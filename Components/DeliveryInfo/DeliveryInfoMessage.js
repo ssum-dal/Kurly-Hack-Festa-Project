@@ -42,19 +42,24 @@ const s = StyleSheet.create({
 
 });
 
-function DeliveryInfoMessage({ navigation, trakingNum, name, address, number, request }) {
+function DeliveryInfoMessage({ navigation, trackingNum, name, address, number, request, orderNum }) {
     return (
         <TouchableOpacity
             activeOpacity={1}
             onPress={() => {
-                navigation.push('Chatting');
+                navigation.push('Chatting',{
+                    trackingNum: trackingNum,
+                    orderNum: orderNum,
+                    isCs: false
+                });
             }}
         >
             <View style={s.InfoTextView}>
                 <View style={s.TextView}>
                     <Text style={s.AddressText}>{address}</Text>
-                    <Text style={s.NormalText}>{name}  |  {number}  |  {trakingNum}</Text>
-                    {request &&
+                    <Text style={s.NormalText}>{name}  |  {number}</Text>
+                    <Text style={s.NormalText}>{trackingNum}</Text>
+                    {request !== "" &&
                         <View style={s.RequestView}>
                             <Text style={s.RequestText}>요청사항</Text>
                             <Text style={s.NormalText}>{request}</Text>
