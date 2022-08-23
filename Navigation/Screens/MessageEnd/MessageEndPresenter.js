@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { View, FlatList, StyleSheet } from "react-native";
+import { useIsFocused } from '@react-navigation/native';
 import DeliveryInfoMessage from "../../../Components/DeliveryInfo/DeliveryInfoMessage";
 import axios from "axios";
 import { mainURL } from "../../../Context/Route";
@@ -13,6 +14,7 @@ const s = StyleSheet.create({
 
 export default({ navigation }) => {
     const [msgDoneList, setMsgDoneList] = useState([]);
+    const isFocused = useIsFocused();
 
     const renderDeliveryInfo = ({item, index}) => {
         return (
@@ -39,7 +41,7 @@ export default({ navigation }) => {
             })
         }
         getData();
-    }, []);
+    }, [isFocused]);
 
     return (
         <View style={s.MessageView}>

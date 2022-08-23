@@ -1,5 +1,7 @@
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { mainURL } from '../../Context/Route';
+import axios from "axios";
 
 export async function requestUserPermission() {
   const authStatus = await messaging().requestPermission();
@@ -22,13 +24,24 @@ async function getFCMToken() {
             if(fcmtoken) {
                 console.log(fcmtoken, "new token");
                 await AsyncStorage.setItem("fcmtoken", fcmtoken);
+
+                const data = {
+                  "device_token": fcmtoken
+                }
+                const url = `${mainURL}/delivery/login`;
+              
+                await axios.post(url, data
+                ).then((result) => {
+                    console.log('axios 요청 성공')
+      
+                }).catch((err) => {
+                    console.log(`getFCMToken err = ${err}`);
+                  });
             }
         } catch (error) {
             console.log(error, "error in fcmtoken");
         }
     }
-    
-    
 }
 
 export const NotificationListener = () => {

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { View, FlatList, StyleSheet } from "react-native";
+import { useIsFocused } from '@react-navigation/native';
 import DeliveryInfo from "../../../Components/DeliveryInfo/DeliveryInfo";
 import axios from "axios";
 import { mainURL } from "../../../Context/Route";
@@ -12,7 +13,8 @@ const s = StyleSheet.create({
 });
 
 export default({ navigation }) => {
-    const [csList, setCsList] = useState([])
+    const [csList, setCsList] = useState([]);
+    const isFocused = useIsFocused();
 
     const renderDeliveryInfo = ({item, index}) => {
         return (
@@ -43,7 +45,7 @@ export default({ navigation }) => {
             })
         }
         getData();
-    }, []);
+    }, [isFocused]);
 
     return (
         <View style={s.AlarmView}>
