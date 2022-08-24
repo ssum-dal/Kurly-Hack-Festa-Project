@@ -92,7 +92,7 @@ export default({name, trackingNum, orderNum, isCs, csId, isDone}) => {
     const scrollRef = useRef();
 
     const completedPhrase = `안녕하세요. ${name} 고객님, 마켓컬리의 박샛별입니다.\n\n주문하신 신선한 상품을 요청하신 문 앞에 안전하게 배송 완료하였습니다.`
-    const delayedPhrase = `안녕하세요. ${name}고객님, 마켓컬리의 박샛별입니다.\n\n배송지연 관련 안내드립니다.`
+    const delayedPhrase = `안녕하세요. ${name}고객님, 마켓컬리의 박샛별입니다.\n\n부득이한 상황 발생으로 배송이 지연되고 있어 안내드립니다.`
     const basicPhrase = `안녕하세요. ${name}고객님, 마켓컬리의 박샛별입니다.\n\n오배송 관련 안내드립니다.`
 
     const renderMessage = ({item, index}) => {    

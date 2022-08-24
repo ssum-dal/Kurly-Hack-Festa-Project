@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {createStackNavigator, CardStyleInterpolators} from "@react-navigation/stack";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
@@ -9,6 +9,11 @@ import Alarm from "../Screens/Alarm/Alarm";
 import Chatting from "../Screens/Chatting/Chatting";
 import AlarmEnd from "../Screens/AlarmEnd/AlarmEnd";
 import Details from "../Screens/Details/Details";
+import { useSelector } from 'react-redux';
+import axios from "axios";
+import { mainURL } from "../../Context/Route";
+import { useDispatch } from 'react-redux';
+import { requestAlarm } from "../../Context/Reducer/badgeReducer";
 
 const RootStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -79,6 +84,8 @@ const AlarmTab = () => {
 }
 
 const BottomTab = () => {
+    const num = useSelector(state => state.badge.badge);
+    
     return (
         <Tab.Navigator
             screenOptions={{
@@ -103,7 +110,7 @@ const BottomTab = () => {
                         <Icon
                             name={focused ? "chatbox-ellipses" : "chatbox-ellipses-outline"}
                             style={{ color: focused ? "#5F0080" : "#404040" }}
-                            size={30}
+                            size={35}
                         />
                     ),
                 }}
@@ -122,11 +129,15 @@ const BottomTab = () => {
                         fontWeight: 'bold',
                         fontSize: 16
                     },
+                    tabBarBadge: num > 0 ? num : null,
+                    tabBarBadgeStyle: {
+                        backgroundColor: '#5F0080'
+                    },
                     tabBarIcon: ({ focused }) => (
                         <Icon
                             name={focused ? "notifications" : "notifications-outline"}
                             style={{ color: focused ? "#5F0080" : "#404040" }}
-                            size={30}
+                            size={35}
                         />
                     ),
                 }}
@@ -136,6 +147,20 @@ const BottomTab = () => {
 }
 
 export default function RootNavigator() {
+    const dispatch = useDispatch();
+	
+    useEffect(()=> {
+		const getData = async() => {
+            const url = `${mainURL}/delivery/cs/todo`;
+
+            await axios.get(url).then((result) => {
+                const response = JSON.parse(result.request._response);
+                dispatch(requestAlarm(response.length));
+            })
+        }
+        getData();
+    }, []);
+
     return (
         <RootStack.Navigator
             screenOptions={{

@@ -4,6 +4,8 @@ import { useIsFocused } from '@react-navigation/native';
 import DeliveryInfo from "../../../Components/DeliveryInfo/DeliveryInfo";
 import axios from "axios";
 import { mainURL } from "../../../Context/Route";
+import { requestAlarm } from "../../../Context/Reducer/badgeReducer";
+import { useDispatch } from 'react-redux';
 
 const s = StyleSheet.create({
     AlarmView: {
@@ -15,6 +17,8 @@ const s = StyleSheet.create({
 export default({ navigation }) => {
     const [csList, setCsList] = useState([]);
     const isFocused = useIsFocused();
+    const dispatch = useDispatch();
+
 
     const renderDeliveryInfo = ({item, index}) => {
         return (
@@ -42,6 +46,7 @@ export default({ navigation }) => {
             await axios.get(url).then((result) => {
                 const response = JSON.parse(result.request._response);
                 setCsList(response);
+                dispatch(requestAlarm(response.length));
             })
         }
         getData();
